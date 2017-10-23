@@ -1,0 +1,4 @@
+<td><%= pokemon.name %></td>
+<td><%= pokemon.level %></td>
+<td><%= pokemon.health %></td>
+<td><%= button_to "Damage!", damage_path(id: pokemon.id), :class => "button medium", :method => :patch %></td>

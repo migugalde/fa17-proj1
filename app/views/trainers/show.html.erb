@@ -1,3 +1,30 @@
 <h3>Trainer</h3>
 <p>Name: <%= @trainer.name if @trainer.name %></p>
 <p>Email: <%= @trainer.email if @trainer.email %></p>
+
+<div class="container">
+  <div class="row">
+    <h3>Pokemon</h3>
+    <div class="column">
+      <table class="table">
+        <tbody>
+        	<tr>
+        		<td>Name</td>
+        		<td>Level</td>
+            <td>Health</td>
+        	</tr>
+          <% @trainer.pokemon.each do |pokemon| %>
+          	<% if pokemon %>
+	            <tr>
+               <%= render pokemon %>
+	            </tr>
+            <% end %>
+          <% end %>
+          <% if @trainer.id == current_trainer.id %>
+            <td><%= button_to "Create a Pokemon", makeform_path, :class => "button medium", :method => :get %></td>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
