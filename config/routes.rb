@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   patch '/damage', to: "pokemons#damage", as: "damage"
   get 'pokemons/new', to: "pokemons#new", as: "makeform"
   post'/pokemons/create', to: "pokemons#create", as: "makepokemon"
+  patch 'pokemons/heal', to: "pokemons#heal", as:"heal"
 end

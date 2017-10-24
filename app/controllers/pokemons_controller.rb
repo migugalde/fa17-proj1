@@ -26,14 +26,29 @@ class PokemonsController < ApplicationController
 
 	def damage
 		pokemon = Pokemon.find(params[:id])
+		trainerid = pokemon.trainer_id
 		current_health = pokemon.health
-		pokemon.update(health: current_health - 10)
 
-		if(pokemon.health <= 0)
-			pokemon.destroy
+		if pokemon.health > 0
+			pokemon.update(health: current_health-10)
+		end
+		#this is the old code associated with destrying a pokemon before healing was implemented
+		# if(pokemon.health <= 0)
+		# 	pokemon.destroy
+		# end
+		
+		redirect_to trainer_path(trainerid)
+	end
+
+	def heal
+		pokemon = Pokemon.find(params[:id])
+		trainerid = pokemon.trainer_id
+		current_health = pokemon.health
+		if pokemon.health < 100
+			pokemon.update(health: current_health+10)
 		end
 		
-		redirect_to trainer_path(current_trainer.id)
+		redirect_to trainer_path(trainerid)
 	end
 
 end
