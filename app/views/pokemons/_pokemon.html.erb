@@ -1,6 +1,10 @@
 <td><%= pokemon.name %></td>
 <td><%= pokemon.level %></td>
 <td><%= pokemon.health %></td>
-<% if pokemon.health > 0 %>
-	<td><%= button_to "Damage!", damage_path(id: pokemon.id), :class => "button medium", :method => :patch %></td>
-<% end %>
+<%
+#<td>
+#<% if pokemon.health > 0 
+#	<%= button_to "Damage!", damage_path(id: pokemon.id), :class => "button medium", :method => :patch 
+# </td>
+#<% end
+%>

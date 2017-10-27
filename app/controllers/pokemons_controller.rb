@@ -5,10 +5,7 @@ class PokemonsController < ApplicationController
 	end
 
 	def create
-		p '*'*80 
-		p params[:pokemon]
-		p params[:pokemon][:name]
-		@pokemon = Pokemon.new(name: params[:pokemon][:name], level: 1, health: 100, trainer_id: current_trainer.id)
+		@pokemon = Pokemon.new(name: params[:pokemon][:name], level: 1, health: 100, trainer_id: current_trainer.id, exp: 0)
 		if @pokemon.save
 			redirect_to trainer_path(current_trainer.id)
 		else
@@ -36,6 +33,14 @@ class PokemonsController < ApplicationController
 		# if(pokemon.health <= 0)
 		# 	pokemon.destroy
 		# end
+
+		pokemon_gaining_exp = Pokemon.find(params[:attack][:attacker_id].to_i)
+		current_exp = pokemon_gaining_exp.exp
+		current_level = pokemon_gaining_exp.level
+		pokemon_gaining_exp.update(exp: current_exp+10)
+		if(pokemon_gaining_exp.exp >= 100)
+			pokemon_gaining_exp.update(level: current_level+1, exp: 0)
+		end
 		
 		redirect_to trainer_path(trainerid)
 	end
